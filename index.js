@@ -1,5 +1,7 @@
 const express = require('express'); // requisição do express
+const cors = require('cors'); // requisição do cors
 const app = express(); // criação da instância do express
+
 const port = 4000; // definição da porta do servidor
 
 // criação da 1ª rota do servidor

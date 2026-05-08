@@ -23,14 +23,19 @@ export default function Index() {
 
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
+      <View>
+        <Text style={{ fontWeight:'bold',}}> Rota Dados:</Text>
+        <Text style={{ fontWeight:'bold' }}>{msg}</Text>
+      </View>
+      <View>
+      <Text style={{ fontWeight:'bold',}}> Rota Lista:</Text>
+      {lista.map(item => (
+        <Text key={item.id}>{item.nome}</Text>
+      ))}
+      </View>
+      
+
     </View>
   );
 }
