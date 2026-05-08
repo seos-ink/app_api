@@ -4,6 +4,13 @@ const app = express(); // criação da instância do express
 
 const port = 4000; // definição da porta do servidor
 
+// 2. ativação do cors p/ permitir acesso as rotas
+app.use(cors({
+    origin: '*', // p/ acesso de qualquer origem
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
+
 // criação da 1ª rota do servidor
 app.get('/', (req, res) => {
     res.send('Hello World!'); // resposta da rota

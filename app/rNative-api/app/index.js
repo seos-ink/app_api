@@ -3,7 +3,7 @@ import { useEffect, useState} from "react";
 
 
 export default function Index() {
-  const [msg, steMsg] = useState("Loading...");
+  const [msg, setMsg] = useState("Loading...");
   const [lista, setLista] = useState([]);
 
   useEffect(() => {
