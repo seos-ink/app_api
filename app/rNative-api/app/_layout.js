@@ -4,7 +4,7 @@ export default function RootLayout() {
   return <Stack>
     <Stack.Screen name="index" options={{
       title: "API com React Native",
-      headerStyle: { backgroundColor: '#3fb39aff' },
+      headerStyle: { backgroundColor: '#1e6b5aff' },
       headerTintColor: '#fff',
       headerTitleAlign: 'center',
       headerTitleStyle: {

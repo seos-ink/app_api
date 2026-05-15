@@ -22,14 +22,16 @@ export default function Index() {
   return (
     <View style={Styles.bg}>
       <View style={Styles.container}>
-        <Text style={Styles.title}> Rota Dados:</Text>
-        <Text style={ Styles.list }>{msg}</Text>
+        <Text style={Styles.title}>Rota Dados:</Text>
+        <Text style={Styles.list}>{msg}</Text>
       </View>
       <View style={Styles.container}>
-        <Text style={ Styles.title }> Rota Lista:</Text>
-        {lista.map(item => (
-          <Text key={item.id} style={Styles.list}>{item.nome}</Text>
-        ))}
+        <Text style={Styles.title}>Rota Lista:</Text>
+        <View style={Styles.listContainer}>
+          {lista.map(item => (
+            <Text key={item.id} style={Styles.list}>{item.nome}</Text>
+          ))}
+        </View>
       </View>
 
 
