@@ -6,7 +6,11 @@ export default function RootLayout() {
       title: "API com React Native",
       headerStyle: { backgroundColor: '#3fb39aff' },
       headerTintColor: '#fff',
-      headerTitleStyle: { fontWeight: 'bold' },
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 22,
+      },
     }} />
   </Stack>;
 }
