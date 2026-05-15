@@ -23,7 +23,7 @@ app.get('/sobre', (req, res) => {
 
 // 3ª rota - usando json
 app.get('/dados', (req, res) => {
-    res.json({ porta: "Porta executada: " + port, dados: "12345678987654321"}); // resposta da rota
+    res.json({ message: "Porta executada: " + port, dados: "12345678987654321" }); // resposta da rota
 })
 
 // 4º rota - usando json
@@ -42,7 +42,7 @@ app.listen(port, (error) => { // definição da porta de escuta do servidor
     if (error) {
         console.log('Server is not working/responding: \n', error);
     } else {
-        console.log('Running server at port ' + port  + '...');
+        console.log('Running server at port ' + port + '...');
     }
-}) 
+})
 // para executar o servidor, usar o comando: node index.js

@@ -9,6 +9,20 @@ export const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
+        fontSize: 22,
+        color: '#3fb39aff',
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 2,
+    },
+    list: {
+        fontSize: 18,
+        color: '#fff',
+    },
+    bg: {
+        flex: 1,
+        backgroundColor: '#696666ff',
+        padding: 20,
     }
 });
 

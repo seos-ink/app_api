@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Styles from "./_style";
 
 
@@ -19,23 +19,19 @@ export default function Index() {
       .then(res => res.json())
       .then(json => setLista(json));
   }, []); // o array vazio [] garante que o useEffect seja executado apenas uma vez, quando o componente for montado
-
-
-
-
   return (
-    <View style={ Styles.container }>
-      <View>
-        <Text style={ Styles.title }> Rota Dados:</Text>
-        <Text style={{ fontWeight:'bold' }}>{msg}</Text>
+    <View style={Styles.bg}>
+      <View style={Styles.container}>
+        <Text style={Styles.title}> Rota Dados:</Text>
+        <Text style={ Styles.list }>{msg}</Text>
       </View>
-      <View>
-      <Text style={{ fontWeight:'bold',}}> Rota Lista:</Text>
-      {lista.map(item => (
-        <Text key={item.id} style={ Styles.list }>{item.nome}</Text>
-      ))}
+      <View style={Styles.container}>
+        <Text style={ Styles.title }> Rota Lista:</Text>
+        {lista.map(item => (
+          <Text key={item.id} style={Styles.list}>{item.nome}</Text>
+        ))}
       </View>
-      
+
 
     </View>
   );
