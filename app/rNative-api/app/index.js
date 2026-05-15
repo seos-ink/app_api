@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
 import { useEffect, useState} from "react";
+import Styles from "./_style";
 
 
 export default function Index() {
@@ -23,15 +24,15 @@ export default function Index() {
 
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
+    <View style={ Styles.container }>
       <View>
-        <Text style={{ fontWeight:'bold',}}> Rota Dados:</Text>
+        <Text style={ Styles.title }> Rota Dados:</Text>
         <Text style={{ fontWeight:'bold' }}>{msg}</Text>
       </View>
       <View>
       <Text style={{ fontWeight:'bold',}}> Rota Lista:</Text>
       {lista.map(item => (
-        <Text key={item.id}>{item.nome}</Text>
+        <Text key={item.id} style={ Styles.list }>{item.nome}</Text>
       ))}
       </View>
       
