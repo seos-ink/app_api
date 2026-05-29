@@ -1,5 +1,6 @@
 const express = require('express'); // requisição do express
 const cors = require('cors'); // requisição do cors
+const sequelize = require('./app/rNative-api/app/db/database'); // requisição do sequelize
 const app = express(); // criação da instância do express
 
 const port = 4000; // definição da porta do servidor
@@ -10,6 +11,8 @@ app.use(cors({
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type']
 }));
+
+app.use(express.json()); // p/ permitir o uso de json nas requisições
 
 // criação da 1ª rota do servidor
 app.get('/', (req, res) => {
@@ -37,6 +40,63 @@ app.get('/lista', (req, res) => {
     res.json(lista); // resposta da rota
 })
 
+// ------------------- teste (se der errado, apagar dps)
+app.get('/usuarios', async (req, res) => {
+    try {
+        console.log("\nAttempting to connect to the database...");
+        const connection = await sequelize.authenticate();
+        console.log("\nConnected to db_apiconnect.");
+
+        
+        const results = await sequelize.query("SELECT * FROM usuarios");
+
+        console.log("\nRetrieving data from database...");
+        
+        const usuarios = results[0].map(usuario => ({
+            id: usuario.id,
+            nome: usuario.name,
+            email: usuario.email,
+            status: usuario.status
+        }));
+
+        const userListing = [
+            { id: 1, nome: usuarios[usuarios.id].nome, email: usuarios[1].email, status: usuarios[1].status },
+        ];
+
+
+        // const [results, metadata] = await sequelize.query("SELECT * FROM usuarios");
+        // const usuarios = results.map(usuario => ({
+        //     id: usuario.id,
+        //     nome: usuario.name,
+        //     email: usuario.email,
+        //     status: usuario.status
+        // }));
+
+        // const userListing = [
+        //     {   id: 1,
+        //         name: usuarios.name, 
+        //         email: usuarios.email, 
+        //         status: usuarios.status
+        //     },
+        //     {}
+        // ];
+
+        res.json(userListing);
+        console.log("\nData retrieved from database.");
+       // res.json(usuarios);
+
+    } catch (error) {
+        console.error("Database connection error: ", error);
+        res.status(500).json({ error: "Database connection was blocked by an error: " + error.message })
+    }
+})
+
+sequelize.sync().then(() => {
+    app.listen(port, () => {
+        console.log("API running at port " + port + "...");
+    })
+})
+// -------------------------------------------
 
 app.listen(port, (error) => { // definição da porta de escuta do servidor
     if (error) {

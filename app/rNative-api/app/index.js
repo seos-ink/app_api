@@ -1,5 +1,6 @@
-import { Text, View } from "react-native";
+import { Text, View, Link, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
+
 import Styles from "./_style";
 
 
@@ -33,6 +34,12 @@ export default function Index() {
           ))}
         </View>
       </View>
+
+      <TouchableOpacity style={{ backgroundColor: '#3fb39aff', padding: 10, borderRadius: 5 }}>
+        <Link href="/teste" style={{ color: '#fff', fontWeight: 'bold' }} asChild>
+          Outro
+        </Link>
+      </TouchableOpacity>
 
 
     </View>
