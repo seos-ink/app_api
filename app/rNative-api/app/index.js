@@ -1,4 +1,4 @@
-import { Text, View, Link, TouchableOpacity } from "react-native";
+import { Text, View, Link, TouchableOpacity, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 
 import Styles from "./_style";
@@ -7,6 +7,7 @@ import Styles from "./_style";
 export default function Index() {
   const [msg, setMsg] = useState("Loading...");
   const [lista, setLista] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const ip = '127.0.0.1'; // IP do servidor (localhost)
@@ -19,8 +20,14 @@ export default function Index() {
     fetch(`http://${ip}:4000/lista`)
       .then(res => res.json())
       .then(json => setLista(json));
+
+    fetch(`http://${ip}:4000/usuarios`)
+      .then(res => res.json())
+      .then(json => setUsers(json));
+
   }, []); // o array vazio [] garante que o useEffect seja executado apenas uma vez, quando o componente for montado
   return (
+
     <View style={Styles.bg}>
       <View style={Styles.container}>
         <Text style={Styles.title}>Rota Dados:</Text>
@@ -34,12 +41,17 @@ export default function Index() {
           ))}
         </View>
       </View>
-
-      <TouchableOpacity style={{ backgroundColor: '#3fb39aff', padding: 10, borderRadius: 5 }}>
-        <Link href="/teste" style={{ color: '#fff', fontWeight: 'bold' }} asChild>
-          Outro
-        </Link>
-      </TouchableOpacity>
+<Text style={Styles.title}>Rota Usuários do Banco de Dados:</Text>
+      <ScrollView style={Styles.scrollContainer}>
+        <View style={Styles.container}>
+          
+          <View style={Styles.usersContainer}>
+            {users.map(user => (
+              <Text key={user.id} style={Styles.list}>{user.name} - {user.email} - {user.status}</Text>
+            ))}
+          </View>
+        </View>
+      </ScrollView>
 
 
     </View>

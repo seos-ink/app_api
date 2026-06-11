@@ -1,9 +1,9 @@
 const express = require('express'); // requisição do express
-const cors = require('cors'); // requisição do cors
-const sequelize = require('./app/rNative-api/app/db/database'); // requisição do sequelize
-const app = express(); // criação da instância do express
+const cors = require('cors');
+const { Sequelize, DataTypes } = require('sequelize'); // requisição do sequelize
 
-const port = 4000; // definição da porta do servidor
+const app = express(); // criação da instância do express
+const porta = 4000; // definição da porta do servidor
 
 // 2. ativação do cors p/ permitir acesso as rotas
 app.use(cors({
@@ -11,8 +11,30 @@ app.use(cors({
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type']
 }));
-
 app.use(express.json()); // p/ permitir o uso de json nas requisições
+
+const sequelize = new Sequelize('db_apiconnect', 'root', '', {
+  host: 'localhost', 
+  dialect: 'mysql',
+  port: 3306, 
+  define: {
+    timestamps: false // Remove a exigência dos campos createdAt e updatedAt
+  }
+});
+
+const User = sequelize.define('User', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  name: DataTypes.STRING,
+  email: DataTypes.STRING,
+  status: DataTypes.STRING,
+
+}, {
+  tableName: 'usuarios' // Garante que o Sequelize use o nome exato da sua tabela
+});
 
 // criação da 1ª rota do servidor
 app.get('/', (req, res) => {
@@ -26,7 +48,7 @@ app.get('/sobre', (req, res) => {
 
 // 3ª rota - usando json
 app.get('/dados', (req, res) => {
-    res.json({ message: "Porta executada: " + port, dados: "12345678987654321" }); // resposta da rota
+    res.json({ message: "Porta executada: " + porta, dados: "Teste da rota: 12345678987654321" }); // resposta da rota
 })
 
 // 4º rota - usando json
@@ -40,69 +62,26 @@ app.get('/lista', (req, res) => {
     res.json(lista); // resposta da rota
 })
 
-// ------------------- teste (se der errado, apagar dps)
+// Rota Nova: Listar os Usuários Reais do Banco de Dados do XAMPP
 app.get('/usuarios', async (req, res) => {
-    try {
-        console.log("\nAttempting to connect to the database...");
-        const connection = await sequelize.authenticate();
-        console.log("\nConnected to db_apiconnect.");
+  try {
+    const usuariosDoBanco = await User.findAll();
+    res.json(usuariosDoBanco);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar dados: ' + error.message });
+  }
+});
 
-        
-        const results = await sequelize.query("SELECT * FROM usuarios");
-
-        console.log("\nRetrieving data from database...");
-        
-        const usuarios = results[0].map(usuario => ({
-            id: usuario.id,
-            nome: usuario.name,
-            email: usuario.email,
-            status: usuario.status
-        }));
-
-        const userListing = [
-            { id: 1, nome: usuarios[usuarios.id].nome, email: usuarios[1].email, status: usuarios[1].status },
-        ];
-
-
-        // const [results, metadata] = await sequelize.query("SELECT * FROM usuarios");
-        // const usuarios = results.map(usuario => ({
-        //     id: usuario.id,
-        //     nome: usuario.name,
-        //     email: usuario.email,
-        //     status: usuario.status
-        // }));
-
-        // const userListing = [
-        //     {   id: 1,
-        //         name: usuarios.name, 
-        //         email: usuarios.email, 
-        //         status: usuarios.status
-        //     },
-        //     {}
-        // ];
-
-        res.json(userListing);
-        console.log("\nData retrieved from database.");
-       // res.json(usuarios);
-
-    } catch (error) {
-        console.error("Database connection error: ", error);
-        res.status(500).json({ error: "Database connection was blocked by an error: " + error.message })
-    }
-})
-
-sequelize.sync().then(() => {
-    app.listen(port, () => {
-        console.log("API running at port " + port + "...");
-    })
-})
-// -------------------------------------------
-
-app.listen(port, (error) => { // definição da porta de escuta do servidor
-    if (error) {
-        console.log('Server is not working/responding: \n', error);
-    } else {
-        console.log('Running server at port ' + port + '...');
-    }
-})
-// para executar o servidor, usar o comando: node index.js
+// 3. Autenticar conexão e Iniciar o Servidor na porta 4000
+sequelize.authenticate()
+  .then(() => {
+    console.log('Conexão com o banco bem sucedida.');
+    
+    app.listen(4000, () => {
+      console.log('Servidor rodando na porta ' + porta);
+    });
+  })
+  .catch((error) => {
+    console.error('Não foi possível conectar ao banco de dados:', error);
+  });

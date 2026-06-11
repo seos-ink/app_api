@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -38,7 +39,21 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#696666ff',
         padding: 20,
-    }
+    },
+    usersContainer: {
+        backgroundColor: '#1c5246ff',
+        padding: 15,
+        margin: 10,
+        borderRadius: 10,
+        borderWidth: 1,
+        width: '80%',
+        alignItems: 'center',
+        gap: 10,
+    },
+    scrollContainer: {
+        flex: 1,
+        width: '100%',
+    },
 });
 
 export default styles;
