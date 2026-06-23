@@ -12,5 +12,16 @@ export default function RootLayout() {
         fontSize: 22,
       },
     }} />
+
+    <Stack.Screen name="insert" options={{
+      title: "Inserir Usuário",
+      headerStyle: { backgroundColor: '#1e6b5aff' },
+      headerTintColor: '#fff',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 22,
+      },
+    }} />
   </Stack>;
 }

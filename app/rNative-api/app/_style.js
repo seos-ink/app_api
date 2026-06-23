@@ -54,6 +54,22 @@ export const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
     },
+    link: {
+        marginTop: 20,
+        textDecorationLine: 'none',
+        textAlign: 'center',
+        padding: 10,
+        color: '#fff',
+        fontFamily: 'Arial',
+        fontStyle: 'italic',        
+    },
+    linkButton: {
+        backgroundColor: '#3fb39aff',
+        padding: 10,
+        borderRadius: 10,
+        alignItems: 'center',
+        marginBottom: 20,
+    }
 });
 
 export default styles;

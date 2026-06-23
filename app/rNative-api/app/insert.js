@@ -45,7 +45,7 @@ export default function Index() {
 
       <Link href="/insert" style={Styles.link} asChild>
         <TouchableOpacity style={Styles.linkButton}>
-          Ir para a página de Inserção
+          Retornar a página de Teste
         </TouchableOpacity>
       </Link>
 
