@@ -60,14 +60,14 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 10,
         color: '#fff',
-        fontFamily: 'Arial',
-        fontStyle: 'italic',        
+        fontFamily: 'Arial',      
     },
     linkButton: {
         backgroundColor: '#3fb39aff',
         padding: 10,
         borderRadius: 10,
         alignItems: 'center',
+        justifyContent: 'center',
         marginBottom: 20,
     }
 });

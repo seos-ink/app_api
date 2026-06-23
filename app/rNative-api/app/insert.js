@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { useEffect, useState } from "react";
 import { Link } from "expo-router";
 
@@ -30,26 +30,21 @@ export default function Index() {
   return (
 
     <View style={Styles.bg}>
-      <View style={Styles.container}>
-        <Text style={Styles.title}>Rota Dados:</Text>
-        <Text style={Styles.list}>{msg}</Text>
-        {/* </View> */}
-        {/* <View style={Styles.container}> */}
-        <Text style={Styles.title}>Rota Lista:</Text>
-        <View style={Styles.listContainer}>
-          {lista.map(item => (
-            <Text key={item.id} style={Styles.list}>{item.nome}</Text>
-          ))}
-        </View>
-      </View>
-
+      
       <Link href="/insert" style={Styles.link} asChild>
         <TouchableOpacity style={Styles.linkButton}>
           Retornar a página de Teste
         </TouchableOpacity>
       </Link>
 
-      <Text style={Styles.title}>Rota do Banco de Dados:</Text>
+      <View style={Styles.container}>
+        <TextInput style={Styles.input}
+          placeholder="Digite o nome do usuário"
+          onChangeText={(text) => setName(text)}
+        />
+      </View>
+
+      <Text style={Styles.title}>Dados</Text>
       <ScrollView style={Styles.scrollContainer}>
         <View style={Styles.container}>
 
