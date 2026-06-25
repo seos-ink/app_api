@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, ScrollView, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView, TextInput, Alert, Button } from "react-native";
 import { useEffect, useState } from "react";
 import { Link } from "expo-router";
 
@@ -10,14 +10,43 @@ export default function Index() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
   const [users, setUsers] = useState([]);
+  const ip = '127.0.0.1'; // IP do servidor (localhost)
 
-  const handleInsert = async () => {
-    const ip = '127.0.0.1';
+  useEffect(() => {
+    fetch(`http://${ip}:4000/usuarios`)
+      .then(res => res.json())
+      .then(json => setUsers(json));
 
-    fetch(`http://${ip}:4000/usuarios`, {
-      
+  }, []);
 
-  })
+
+  const handleInsert = async () => {    
+    fetch(`http://${ip}:4000/insert`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        status: status
+      }),
+    })
+      .then(async res => {
+        const json = await res.json();
+        if (res.ok) throw new Error(json.message || 'Erro ao inserir usuário');
+        return json;
+      })
+      .then(json => {
+        Alert.alert('Sucesso', 'Usuário inserido com sucesso!');
+        // Atualiza a lista de usuários após a inserção
+        fetch(`http://${ip}:4000/usuarios`)
+          .then(res => res.json())
+          .then(json => setUsers(json));
+        // Router.back();
+      })
+
+  }
 
   // const [msg, setMsg] = useState("Loading...");
   // const [lista, setLista] = useState([]);
@@ -42,7 +71,7 @@ export default function Index() {
   return (
 
     <View style={Styles.bg}>
-      
+
       <Link href="./" style={Styles.link} asChild>
         <TouchableOpacity style={Styles.linkButton}>
           Retornar a página de Teste
@@ -52,19 +81,22 @@ export default function Index() {
       <View style={Styles.container}>
         <TextInput style={Styles.input}
           placeholder="Digite o nome do usuário"
-          onChangeText={(text) => setName(text)}
+          onChangeText={setName}
+          value={name}
         />
         <TextInput style={Styles.input}
           placeholder="Digite o email do usuário"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={setEmail}
+          value={email}
         />
         <TextInput style={Styles.input}
           placeholder="Digite o status do usuário"
-          onChangeText={(text) => setStatus(text)}
+          onChangeText={setStatus}
+          value={status}
         />
-        <button style={Styles.linkButton} onPress={handleInsert}>
+        <TouchableOpacity style={Styles.linkButton} onPress={handleInsert}>
           Inserir Usuário
-        </button>
+        </TouchableOpacity>
 
       </View>
 

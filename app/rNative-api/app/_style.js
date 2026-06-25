@@ -81,6 +81,11 @@ export const styles = StyleSheet.create({
         width: '80%',
         backgroundColor: '#fff',
     },
+    button: {
+        backgroundColor: '#007bff',
+        padding: 10,
+        borderRadius: 5,
+    }
 });
 
 export default styles;
