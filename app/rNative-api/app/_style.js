@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -26,7 +25,7 @@ export const styles = StyleSheet.create({
         
     },
     listContainer: {
-        backgroundColor: '#1c5246ff',
+        backgroundColor: '#0c5041ff',
         padding: 15,
         margin: 10,
         borderRadius: 10,
@@ -37,15 +36,16 @@ export const styles = StyleSheet.create({
     },
     bg: {
         flex: 1,
-        backgroundColor: '#696666ff',
+        backgroundColor: '#1d423f67',
         padding: 20,
     },
     usersContainer: {
-        backgroundColor: '#1c5246ff',
+        backgroundColor: '#003c6dff',
         padding: 15,
         margin: 10,
         borderRadius: 10,
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: '#707070ff',
         width: '80%',
         alignItems: 'center',
         gap: 10,
@@ -63,13 +63,24 @@ export const styles = StyleSheet.create({
         fontFamily: 'Arial',      
     },
     linkButton: {
-        backgroundColor: '#3fb39aff',
+        backgroundColor: '#2958adff',
         padding: 10,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 20,
-    }
+        borderWidth: 3,
+        borderColor: '#4586e9ff',
+    },
+    input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        width: '80%',
+        backgroundColor: '#fff',
+    },
 });
 
 export default styles;
