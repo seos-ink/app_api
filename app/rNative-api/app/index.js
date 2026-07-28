@@ -46,9 +46,9 @@ export default function Index() {
       <Link href="/insert" style={Styles.link} asChild>
         <TouchableOpacity style={Styles.linkButton}>
           Ir para a página de Inserção
-        </TouchableOpacity>
+        </TouchableOpacity> 
       </Link>
-
+      {/* teste */}
       <Text style={Styles.title}>Rota do Banco de Dados:</Text>
       <ScrollView style={Styles.scrollContainer}>
         <View style={Styles.container}>
