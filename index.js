@@ -1,4 +1,5 @@
 const express = require('express'); // requisição do express
+// router.get -
 const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize'); // requisição do sequelize
 
