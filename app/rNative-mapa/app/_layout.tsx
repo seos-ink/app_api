@@ -3,8 +3,8 @@ import { Stack } from "expo-router";
 export default function RootLayout() {
   return <Stack>
     <Stack.Screen name="index" options={{
-      title: "app novo",
-      headerStyle: { backgroundColor: '#011f72ff' },
+      title: "API com React Native",
+      headerStyle: { backgroundColor: '#001a53ff' },
       headerTintColor: '#fff',
       headerTitleAlign: 'center',
       headerTitleStyle: {
