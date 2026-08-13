@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 export default function RootLayout() {
   return <Stack>
     <Stack.Screen name="index" options={{
-      title: "API com React Native",
+      title: "Mapa com React Native",
       headerStyle: { backgroundColor: '#001a53ff' },
       headerTintColor: '#fff',
       headerTitleAlign: 'center',
