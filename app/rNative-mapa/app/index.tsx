@@ -1,12 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, Platform, Button, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import theme from "./theme";
 
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
+
 export default function LiveMapScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [channels, setChannels] = useState<Notifications.NotificationChannel[]>([]);
+  const [notification, setNotification] = useState<Notifications.Notification | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => token && setExpoPushToken(token));
+
+    if (Platform.OS === 'android') {
+      Notifications.getNotificationChannelsAsync().then(value => setChannels(value ?? []));
+    }
+    const notificationListener = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      notificationListener.remove();
+      responseListener.remove();
+    };
+  }, []);
+
 
   useEffect(() => {
     async function getCurrentLocation() {
@@ -70,6 +108,84 @@ export default function LiveMapScreen() {
           />
         </MapView>
       )}
+      <View style={{ position: 'absolute', bottom: 20, left: 20, right: 20 }}>
+        {/* <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Title: {notification && notification.request.content.title} </Text>
+          <Text>Body: {notification && notification.request.content.body}</Text>
+          <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
+        </View> */}
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#007AFF',
+            padding: 15,
+            borderRadius: 10,
+            alignItems: 'center',
+          }}
+          onPress={async () => {
+            await schedulePushNotification();
+          }}
+        >
+          <Text style={{ color: 'white', fontWeight: 'bold' }}>Notification</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
+}
+
+async function schedulePushNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "You've got mail! 📬",
+      body: 'Here is the notification body',
+      data: { data: 'goes here', test: { test1: 'more data' } },
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds: 0.5,
+    },
+  });
+}
+
+async function registerForPushNotificationsAsync() {
+  let token;
+
+  if (Platform.OS === 'android') {
+    await Notifications.setNotificationChannelAsync('myNotificationChannel', {
+      name: 'A channel is needed for the permissions prompt to appear',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  const { status: existingStatus } = await Notifications.getPermissionsAsync();
+  let finalStatus = existingStatus;
+  if (existingStatus !== 'granted') {
+    const { status } = await Notifications.requestPermissionsAsync();
+    finalStatus = status;
+  }
+  if (finalStatus !== 'granted') {
+    alert('Failed to get push token for push notification!');
+    return;
+  }
+  // Learn more about projectId:
+  // https://docs.expo.dev/push-notifications/push-notifications-setup/#configure-projectid
+  // EAS projectId is used here.
+  try {
+    const projectId =
+      Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
+    if (!projectId) {
+      throw new Error('Project ID not found');
+    }
+    token = (
+      await Notifications.getExpoPushTokenAsync({
+        projectId,
+      })
+    ).data;
+    console.log(token);
+  } catch (e) {
+    token = `${e}`;
+  }
+
+  return token;
 }

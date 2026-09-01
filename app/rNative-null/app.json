@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "rNative-mapa",
-    "slug": "rNative-mapa",
+    "name": "rNative-null",
+    "slug": "rNative-null",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "rnativemapa",
+    "scheme": "rnativenull",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -27,7 +27,6 @@
     },
     "plugins": [
       "expo-router",
-      "expo-notifications",
       [
         "expo-splash-screen",
         {
