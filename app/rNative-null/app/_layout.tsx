@@ -1,5 +1,18 @@
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return <Stack>
+
+    <Stack.Screen name="index" options={{
+      title: "theAnalyser mini",
+      headerStyle: { backgroundColor: '#104068ff' },
+      headerTintColor: '#fff',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 22,
+      },
+    }} />
+
+  </Stack>;
 }
