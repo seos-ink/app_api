@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
         textShadowRadius: 2,
 
         textAlign: 'center',
-        
+
 
         // borderBottomColor: 'black',
         // borderBottomWidth: 3,        
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     list: {
         fontSize: 18,
         color: '#fff',
-        
+
     },
     listContainer: {
         backgroundColor: '#0c5041ff',
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 10,
         color: '#fff',
-        fontFamily: 'Arial',      
+        fontFamily: 'Arial',
     },
     linkButton: {
         backgroundColor: '#2958adff',
@@ -84,6 +84,12 @@ export const styles = StyleSheet.create({
         width: '80%',
         backgroundColor: '#fff',
     },
+    centerContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
     button: {
         backgroundColor: '#0768a8ff',
         padding: 10,
@@ -92,7 +98,16 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         width: '75%',
         alignItems: 'center',
-    }
+    },
+    map: {
+        width: '100%',
+        height: '100%',
+    },
+    text: {
+        marginTop: 10,
+        fontSize: 16,
+        textAlign: 'center',
+    },
 });
 
 export default styles;

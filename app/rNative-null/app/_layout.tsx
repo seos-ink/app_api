@@ -14,5 +14,16 @@ export default function RootLayout() {
       },
     }} />
 
+    <Stack.Screen name="maps" options={{
+      title: "Mapas",
+      headerStyle: { backgroundColor: '#104068ff' },
+      headerTintColor: '#fff',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 22,
+      },
+    }} />
+
   </Stack>;
 }
