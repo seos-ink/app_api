@@ -1,4 +1,5 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import styles from "./_theme";
 
 export default function Index() {
   return (
@@ -8,10 +9,4 @@ export default function Index() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+
