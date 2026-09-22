@@ -1,11 +1,19 @@
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
-import styles from "./_theme";
+import estilo from "./_estilo";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
-    </View>
+    <ScrollView>
+      <View style={estilo.box}>
+        <Text style={estilo.titulo}>Olá, mundo!</Text>
+        <Text style={estilo.subtitulo}>Este é o meu primeiro app em React Native.</Text>
+      </View>
+
+      <View style={estilo.box}>
+        <Text style={estilo.titulo}>Atividade de React Native</Text>
+        <Text style={estilo.subtitulo}>abcdefghijklmnopqrstuvwxyz</Text>
+      </View>
+    </ScrollView>
   );
 }
 
