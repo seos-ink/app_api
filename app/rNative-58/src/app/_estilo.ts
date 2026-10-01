@@ -2,10 +2,12 @@ import { StyleSheet } from "react-native";
 
 const estilo = StyleSheet.create({
     box: {
+        alignSelf: "center",
         display: "flex",
         flexDirection: "row",
         margin: 5,
         padding: 5,
+        width: "75%",
         borderRadius: 15,
         backgroundColor: "#ccc",
     },
@@ -14,11 +16,12 @@ const estilo = StyleSheet.create({
         fontSize: 20,
         color: "#000",
         justifyContent: "center",
-        // width: "80%",
+        width: "80%",
     },
     subtitulo: {
         fontSize: 14,
         color: "#222",
+        width: "50%",
     },
     imagem: {
         width: 100,
