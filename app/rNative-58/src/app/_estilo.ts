@@ -7,7 +7,7 @@ const estilo = StyleSheet.create({
         flexDirection: "row",
         margin: 5,
         padding: 5,
-        width: "75%",
+        width: "85%",
         borderRadius: 15,
         backgroundColor: "#ccc",
     },
@@ -28,7 +28,33 @@ const estilo = StyleSheet.create({
         height: 100,
         borderRadius: 25,
         margin: 10,
-    }
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+    },
+    text: {
+        textAlign: 'center',
+        marginBottom: 10,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        marginTop: 15,
+    },
+    button: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#eee',
+        padding: 10,
+    },
+    middleButton: {
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderColor: '#ccc',
+    },
 });
 
 export default estilo;
